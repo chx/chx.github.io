@@ -4,10 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>ThinkPad search</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.14/vue.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-vue@2.21.2/dist/bootstrap-vue.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-vue@2.21.2/dist/bootstrap-vue.js"></script>
+
   <script src="https://cdn.rawgit.com/itemsapi/itemsjs/master/dist/itemsjs.js"></script>
   <script src="data.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/css/bootstrap.min.css">
 
   <style>ul { list-style-type: none; }</style>
 </head>
@@ -43,15 +46,17 @@
         <div class="clearfix"></div>
         <ul>
           <li v-for="(item, index) in searchResult.data.items">
-            <b-button :v-b-toggle="'collapse-' + index" variant="primary">{{ item.name }}</b-button>
-
-<!--            <b-collapse :id="'collapse-' + index" class="mt-2">
-                <b-card>
-                    <p class="card-text">{{ item.machine_code }}</p>
-                </b-card>
-            </b-collapse>-->
+{{ item.name }}
+<!--
+              <b-button :v-b-toggle="'collapse-' + index" variant="primary">{{ item.name }}</b-button>
+              <b-collapse :id="'collapse-' + index" class="mt-2">
+                  <b-card>
+                      <p class="card-text">{{ item.machine_code }}</p>
+                  </b-card>
+              </b-collapse>
+-->
           </li>
-        </ol>
+        </ul>
         <div class="clearfix"></div>
       </div>
 
@@ -85,8 +90,8 @@ var configuration = {
     cpu_manufacturer: {
       title: "CPU Manufacturer",
     },
-    usb4: {
-      title: "USB4 / TB4",
+    tb: {
+      title: "USB4 / Thunderbolt",
     },
     m2_count: {
       title: "Number of M.2 slots",
