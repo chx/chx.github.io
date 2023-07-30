@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>ThinkPad search</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.14/vue.min.js"></script>
+  <script src="https://cdn.rawgit.com/itemsapi/itemsjs/master/dist/itemsjs.js"></script>
+  <script src="data.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/css/bootstrap.min.css">
+
+  <style>ul { list-style-type: none; }</style>
+</head>
+
+<body translate="no">
+
+
+<div id="el">
+  <div class="container" style="margin-top: 50px;">
+
+    <h1>List of {{ searchResult.data.items.length }} ThinkPads</h1>
+
+    <div class="row">
+      <div class="col-md-2 col-xs-2">
+        <div v-for="facet in searchResult.data.aggregations">
+          <h5 style="margin-bottom: 5px;"><strong style="color: #337ab7;">{{ facet.title }}</strong></h5>
+
+          <ul class="browse-list list-unstyled long-list" style="margin-bottom: 0;">
+            <li v-for="bucket in facet.buckets">
+              <div class="checkbox block" style="margin-top: 0; margin-bottom: 0;">
+                <label>
+                  <input class="checkbox" type="checkbox" v-model="filters[facet.name]" v-bind:value="bucket.key">
+                  {{ bucket.key }} ({{ bucket.doc_count }})
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-10 col-xs-10">
+        <div class="breadcrumbs"></div>
+        <div class="clearfix"></div>
+        <ul>
+          <li v-for="(item, index) in searchResult.data.items">
+            <b-button :v-b-toggle="'collapse-' + index" variant="primary">{{ item.name }}</b-button>
+
+<!--            <b-collapse :id="'collapse-' + index" class="mt-2">
+                <b-card>
+                    <p class="card-text">{{ item.machine_code }}</p>
+                </b-card>
+            </b-collapse>-->
+          </li>
+        </ol>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="clearfix" style="margin-bottom: 100px;"></div>
+    </div>
+  </div>
+</div>
+  
+<script id="rendered-js" >
+var configuration = {
+  searchableFields: [],
+  sortings: {
+    name_asc: {
+      field: "name",
+      order: "asc" } },
+
+
+  aggregations: {
+    memory_slots: {
+      title: "Memory slots",
+    },
+    max_memory: {
+      title: "Max memory",
+    },
+    soldered_memory: {
+      title: "Max soldered memory",
+    },
+    memory_type: {
+      title: "Memory type",
+    },
+    cpu_manufacturer: {
+      title: "CPU Manufacturer",
+    },
+    usb4: {
+      title: 'USB4 / TB4'
+    }
+  }
+}
+Object.keys(configuration.aggregations).forEach(function (key) {
+  config = configuration.aggregations[key];
+  config.sort = 'key';
+  config.chosen_filters_on_top = false;
+  config.hide_zero_doc_count = true;
+})
+
+itemsjs = itemsjs(rows, configuration);
+
+var vm = new Vue({
+  el: "#el",
+  data: function () {
+    // making it more generic
+    var filters = {};
+    Object.keys(configuration.aggregations).map(function (v) {
+      filters[v] = [];
+    });
+
+    // adding pagination variables
+    var page = this.page || 1;
+    var per_page = this.per_page || 12;
+
+    return {
+      query: "",
+      // initializing filters with empty arrays
+      filters: filters,
+      // setting pagination variables
+      page: 1,
+      per_page: 300 };
+
+  },
+  methods: {
+    reset: function () {
+      var filters = {};
+      Object.keys(configuration.aggregations).map(function (v) {
+        filters[v] = [];
+      });
+
+      this.filters = filters;
+      this.page = 1;
+      this.query = "";
+    },
+    toggeleDiv: function() {
+      this.display_div = !this.display_div;
+    }
+  },
+
+  computed: {
+    searchResult: function () {
+      var result = itemsjs.search({
+        query: this.query,
+        page: this.page,
+        per_page: 300,
+        filters: this.filters });
+      return result;
+    } } });
+    </script>
+
+  
+</body>
+
+</html>
+
