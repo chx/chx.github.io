@@ -1184,6 +1184,22 @@ var rows = [
     "m2_size": "2280"
   },
   {
+    "name": "ThinkPad X13 Gen 4 (AMD)",
+    "machine_code": "21J3",
+    "tb": "USB4 / TB4",
+    "cpu_manufacturer": "AMD",
+    "soldered_memory": 32,
+    "max_memory": 32,
+    "memory_slots": 0,
+    "memory_type": [
+      "DDR5"
+    ],
+    "m2_count": [
+      1
+    ],
+    "m2_size": "2280"
+  },
+  {
     "name": "ThinkPad X13 Yoga Gen 1",
     "machine_code": "20SX",
     "tb": "TB3",
