@@ -634,6 +634,22 @@ var rows = [
     "m2_size": "2280"
   },
   {
+    "name": "ThinkPad T14s Gen 4 (AMD)",
+    "machine_code": "21F8",
+    "tb": "USB4 / TB4",
+    "cpu_manufacturer": "AMD",
+    "soldered_memory": 32,
+    "max_memory": 32,
+    "memory_slots": 0,
+    "memory_type": [
+      "DDR5"
+    ],
+    "m2_count": [
+      1
+    ],
+    "m2_size": "2280"
+  },
+  {
     "name": "ThinkPad T15 Gen 1",
     "machine_code": "20S6",
     "tb": "TB3",
