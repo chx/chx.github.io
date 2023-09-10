@@ -333,7 +333,6 @@ var rows = [
     "max_memory": 64,
     "memory_slots": 0,
     "memory_type": [
-      "DDR5",
       "DDR5"
     ],
     "m2_count": [
@@ -803,8 +802,6 @@ var rows = [
     "max_memory": 32,
     "memory_slots": 0,
     "memory_type": [
-      "DDR4",
-      "DDR5",
       "DDR4",
       "DDR5"
     ],
