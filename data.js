@@ -1309,6 +1309,22 @@ var rows = [
     "m2_size": "2242"
   },
   {
+    "name": "ThinkPad Z13 Gen 2",
+    "machine_code": "???",
+    "tb": "USB4 / TB4",
+    "cpu_manufacturer": "AMD",
+    "soldered_memory": 64,
+    "max_memory": 64,
+    "memory_slots": 0,
+    "memory_type": [
+      "DDR5"
+    ],
+    "m2_count": [
+      1
+    ],
+    "m2_size": "2242"
+  },
+  {
     "name": "ThinkPad Z16 Gen 1",
     "machine_code": "21D4",
     "tb": "USB4 / TB4",
